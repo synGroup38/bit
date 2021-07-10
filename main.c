@@ -35,10 +35,22 @@ bool checkBit(uint8_t bitNumber, uint32_t* bitField){
    }
    return false; 
 }
+
+void printBin(uint32_t *bitField){
+   for (int i = 0 ;i < 31 ; i++ ){
+      if(checkBit(i,bitField)){
+         printf("+"); 
+      }else{
+         printf("."); 
+      }
+   }
+   printf("\n");
+
+}
 int main(){
 
-   uint32_t field = WRITE; 
-   pipe(READ); 
+   uint32_t field = WRITE ; 
+   pipe(READ|WRITE); 
    printf("field before clear: %i \n",field); 
    clearBit(1,&field);
    printf("field after clear: %i \n",field);
@@ -47,5 +59,6 @@ int main(){
    if(checkBit(1,&field)){
       printf("bit 1 is set \n");
    }
+   printBin(&field); 
    return 0; 
 }

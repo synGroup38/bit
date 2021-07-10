@@ -145,6 +145,49 @@ checkBit:
 	.cfi_endproc
 .LFE3:
 	.size	checkBit, .-checkBit
+	.globl	printBin
+	.type	printBin, @function
+printBin:
+.LFB4:
+	.cfi_startproc
+	pushq	%rbp
+	.cfi_def_cfa_offset 16
+	.cfi_offset 6, -16
+	movq	%rsp, %rbp
+	.cfi_def_cfa_register 6
+	subq	$32, %rsp
+	movq	%rdi, -24(%rbp)
+	movl	$0, -4(%rbp)
+	jmp	.L11
+.L14:
+	movl	-4(%rbp), %eax
+	movzbl	%al, %eax
+	movq	-24(%rbp), %rdx
+	movq	%rdx, %rsi
+	movl	%eax, %edi
+	call	checkBit
+	testb	%al, %al
+	je	.L12
+	movl	$43, %edi
+	call	putchar@PLT
+	jmp	.L13
+.L12:
+	movl	$46, %edi
+	call	putchar@PLT
+.L13:
+	addl	$1, -4(%rbp)
+.L11:
+	cmpl	$30, -4(%rbp)
+	jle	.L14
+	movl	$10, %edi
+	call	putchar@PLT
+	nop
+	leave
+	.cfi_def_cfa 7, 8
+	ret
+	.cfi_endproc
+.LFE4:
+	.size	printBin, .-printBin
 	.section	.rodata
 .LC2:
 	.string	"field before clear: %i \n"
@@ -158,7 +201,7 @@ checkBit:
 	.globl	main
 	.type	main, @function
 main:
-.LFB4:
+.LFB5:
 	.cfi_startproc
 	pushq	%rbp
 	.cfi_def_cfa_offset 16
@@ -170,7 +213,7 @@ main:
 	movq	%rax, -8(%rbp)
 	xorl	%eax, %eax
 	movl	$2, -12(%rbp)
-	movl	$1, %edi
+	movl	$3, %edi
 	call	pipe
 	movl	-12(%rbp), %eax
 	movl	%eax, %esi
@@ -203,22 +246,25 @@ main:
 	movl	$1, %edi
 	call	checkBit
 	testb	%al, %al
-	je	.L11
+	je	.L16
 	leaq	.LC5(%rip), %rax
 	movq	%rax, %rdi
 	call	puts@PLT
-.L11:
+.L16:
+	leaq	-12(%rbp), %rax
+	movq	%rax, %rdi
+	call	printBin
 	movl	$0, %eax
 	movq	-8(%rbp), %rdx
 	subq	%fs:40, %rdx
-	je	.L13
+	je	.L18
 	call	__stack_chk_fail@PLT
-.L13:
+.L18:
 	leave
 	.cfi_def_cfa 7, 8
 	ret
 	.cfi_endproc
-.LFE4:
+.LFE5:
 	.size	main, .-main
 	.ident	"GCC: (GNU) 11.1.0"
 	.section	.note.GNU-stack,"",@progbits
