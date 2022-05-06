@@ -1,0 +1,22 @@
+{
+  "name": "bit",
+  "version": "1.0.0",
+  "description": "sample",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ChiedozieOkoh/bit.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ChiedozieOkoh/bit/issues"
+  },
+  "homepage": "https://github.com/ChiedozieOkoh/bit#readme",
+  "dependencies": {
+    "pac-resolver": "^4.2.0"
+  }
+}
