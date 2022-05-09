@@ -17,6 +17,6 @@
   },
   "homepage": "https://github.com/ChiedozieOkoh/bit#readme",
   "dependencies": {
-    "pac-resolver": "^4.2.0"
+    "pac-resolver": "^5.0.0"
   }
 }
